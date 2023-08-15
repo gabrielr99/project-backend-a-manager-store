@@ -7,4 +7,6 @@ app.get('/', (_request, response) => {
   response.json({ status: 'Store Manager UP!' });
 });
 
+//INICIANDO
+
 module.exports = app;
