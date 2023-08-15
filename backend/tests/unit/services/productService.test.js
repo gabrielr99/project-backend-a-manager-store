@@ -1,24 +1,11 @@
 const chai = require('chai');
 const sinon = require('sinon');
+
 const productsModel = require('../../../src/models/products.model');
 const { productsService } = require('../../../src/services/index');
+const dbProducts = require('../../mochs/dbProducts');
 
 const { expect } = chai;
-
-const dbProducts = [
-  {
-    id: 1,
-    name: 'Martelo de Thor',
-  },
-  {
-    id: 2,
-    name: 'Traje de encolhimento',
-  },
-  {
-    id: 3,
-    name: 'Escudo do Capitão América',
-  },
-];
 
 describe('testes prodctsService', function () {
   it('testando findAll', async function () {

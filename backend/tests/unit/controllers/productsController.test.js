@@ -4,24 +4,10 @@ const sinonChai = require('sinon-chai');
 
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
+const dbProducts = require('../../mochs/dbProducts');
 
 const { expect } = chai;
 chai.use(sinonChai);
-
-const dbProducts = [
-  {
-    id: 1,
-    name: 'Martelo de Thor',
-  },
-  {
-    id: 2,
-    name: 'Traje de encolhimento',
-  },
-  {
-    id: 3,
-    name: 'Escudo do Capitão América',
-  },
-];
 
 describe('testando productController', function () {
   it('testando findAll', async function () {
