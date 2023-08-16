@@ -1,5 +1,7 @@
 const { salesModel } = require('../models');
 
+const { validateInsertSales } = require('../utils/validateInsertSales');
+
 const findAll = async () => {
   const sales = await salesModel.findAll();
   if (!sales) {
@@ -16,7 +18,22 @@ const findById = async (saleId) => {
   return { status: 'SUCCESSFUL', data: sale };
 };
 
+const insert = async (sales) => {
+  const error = await validateInsertSales(sales);
+  if (error) {
+    const { data } = error;
+    return { status: error.status, data: { message: data.message } };
+  }
+  const id = await salesModel.insert(sales);
+  const insertSales = {
+    id,
+    itemsSold: sales,
+  };
+  return { status: 'CREATED', data: insertSales };
+};
+
 module.exports = {
   findAll,
   findById,
+  insert,
 };
