@@ -12,9 +12,13 @@ app.get('/', (_request, response) => {
 
 // INICIANDO
 
+// PRODUCTS
+
 app.get('/products', productsController.findAll);
 app.get('/products/:id', productsController.findById);
 app.post('/products', validateInsertProduct, productsController.insert);
+
+// SALES
 
 app.get('/sales', salesController.findAll);
 app.get('/sales/:id', salesController.findById);
