@@ -34,6 +34,22 @@ describe('testes ProductsModel', function () {
     expect(Object.values(result)).to.be.deep.equal([1, 'Martelo de Thor']);
   });
 
+  it('testando função insert', async function () {
+    // AAA
+    // Arramjar(preparar)
+    const lenght = dbProducts.length;
+    sinon.stub(connection, 'execute').resolves([{ insertId: lenght + 1 }]);
+    const newProduct = {
+      name: 'ProdutoX',
+    };
+    // Agir
+    const newProductId = lenght + 1;
+    const result = await productsModel.insert(newProduct);
+    // Acertar(averiguar)
+    expect(result).to.be.a('number');
+    expect(result).to.be.deep.equal(newProductId);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

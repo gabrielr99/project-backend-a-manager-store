@@ -45,6 +45,30 @@ describe('testando productController', function () {
     expect(res.json).to.be.calledWith(dbProducts[0]);
   });
 
+  it('testando funcão insert', async function () {
+    const lenght = dbProducts.length;
+    const newProduct = {
+      id: lenght + 1,
+      name: 'ProdutoX',
+    };
+
+    sinon.stub(productsService, 'insert')
+      .resolves({ status: 'CREATED', data: newProduct });
+
+    const req = {
+      body: { name: 'ProdutoX' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await productsController.insert(req, res);
+
+    expect(res.status).to.be.calledWith(201);
+    expect(res.json).to.be.calledWith(newProduct);
+  });
+
   beforeEach(function () {
     sinon.restore();
   });

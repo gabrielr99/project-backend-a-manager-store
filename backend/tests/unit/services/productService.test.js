@@ -47,6 +47,26 @@ describe('testes prodctsService', function () {
     expect(data.message).to.be.equal('Product not found');
   });
 
+  it('testando função insert', async function () {
+    // AAA
+    // Arramjar(preparar)
+    const lenght = dbProducts.length;
+    sinon.stub(productsModel, 'insert').resolves(lenght + 1);
+    // Agir
+    const newProduct = {
+      name: 'ProdutoX',
+    };
+    const id = await productsModel.insert(newProduct);
+    // AAA
+    // Arramjar(preparar)
+    sinon.stub(productsModel, 'findById').resolves({ id, ...newProduct });
+    const result = await productsService.insert(newProduct);
+    // Acertar(averiguar)
+    expect(result).to.be.an('object');
+    expect(result.status).to.be.equal('CREATED');
+    expect(result.data).to.be.deep.equal({ id, name: newProduct.name });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
