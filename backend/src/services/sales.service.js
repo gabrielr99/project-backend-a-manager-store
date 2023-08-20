@@ -1,5 +1,4 @@
 const { salesModel } = require('../models');
-
 const { validateInsertSales } = require('../utils/validateInsertSales');
 
 const findAll = async () => {

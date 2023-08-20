@@ -17,6 +17,7 @@ app.get('/', (_request, response) => {
 app.get('/products', productsController.findAll);
 app.get('/products/:id', productsController.findById);
 app.post('/products', validateInsertProduct, productsController.insert);
+app.put('/products/:id', validateInsertProduct, productsController.update);
 
 // SALES
 

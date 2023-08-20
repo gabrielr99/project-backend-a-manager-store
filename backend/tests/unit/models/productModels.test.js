@@ -27,7 +27,6 @@ describe('testes ProductsModel', function () {
     // Agir
     const productId = 1;
     const result = await productsModel.findById(productId);
-    console.log(result);
     expect(result).to.be.a('object');
     expect(result).to.be.deep.equal(dbProducts[0]);
     expect(Object.keys(result)).to.be.deep.equal(['id', 'name']);

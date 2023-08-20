@@ -9,7 +9,7 @@ const { salesFromDB, foundSales } = require('../../mochs/dbSales');
 const { expect } = chai;
 chai.use(sinonChai);
 
-describe('Testes da SALES CONTROLLER', function () {
+describe('Testes da salesController', function () {
   it('Lista todas as vendas com sucesso - Status 200', async function () {
     sinon.stub(salesService, 'findAll')
       .resolves({ status: 'SUCCESSFUL', data: salesFromDB });

@@ -39,7 +39,15 @@ const foundSales = [
   },
 ];
 
+const insertSale = [
+  {
+    productId: 3,
+    quantity: 10,
+  },
+];
+
 module.exports = {
     salesFromDB,
     foundSales,
+    insertSale,
 };
