@@ -13,14 +13,13 @@ app.get('/', (_request, response) => {
 // INICIANDO
 
 // PRODUCTS
-
 app.get('/products', productsController.findAll);
 app.get('/products/:id', productsController.findById);
 app.post('/products', validateInsertProduct, productsController.insert);
 app.put('/products/:id', validateInsertProduct, productsController.update);
+app.delete('/products/:id', productsController.deleted);
 
 // SALES
-
 app.get('/sales', salesController.findAll);
 app.get('/sales/:id', salesController.findById);
 app.post('/sales', salesController.insert);
