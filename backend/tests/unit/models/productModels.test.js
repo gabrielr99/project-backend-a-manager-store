@@ -8,12 +8,8 @@ const productsModel = require('../../../src/models/products.model');
 
 describe('testes ProductsModel', function () {
   it('testando função findAll', async function () {
-    // AAA
-    // Arramjar(preparar)
     sinon.stub(connection, 'execute').resolves([dbProducts]);
-    // Agir
     const result = await productsModel.findAll();
-    // Acertar(averiguar)
     expect(result).to.be.a('array');
     expect(result).to.be.deep.equal(dbProducts);
     expect(Object.keys(result[0])).to.be.deep.equal(['id', 'name']);
@@ -21,10 +17,7 @@ describe('testes ProductsModel', function () {
   });
 
   it('testando função findById', async function () {
-    // AAA
-    // Arramjar(preparar)
     sinon.stub(connection, 'execute').resolves([dbProducts]);
-    // Agir
     const productId = 1;
     const result = await productsModel.findById(productId);
     expect(result).to.be.a('object');
@@ -34,19 +27,23 @@ describe('testes ProductsModel', function () {
   });
 
   it('testando função insert', async function () {
-    // AAA
-    // Arramjar(preparar)
     const lenght = dbProducts.length;
     sinon.stub(connection, 'execute').resolves([{ insertId: lenght + 1 }]);
     const newProduct = {
       name: 'ProdutoX',
     };
-    // Agir
     const newProductId = lenght + 1;
     const result = await productsModel.insert(newProduct);
-    // Acertar(averiguar)
     expect(result).to.be.a('number');
     expect(result).to.be.deep.equal(newProductId);
+  });
+
+  it('testando função deleted', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const productId = 1;
+    const result = await productsModel.deleted(productId);
+    expect(result).to.be.a('array');
+    expect(result).to.be.deep.equal([{ affectedRows: 1 }]);
   });
 
   afterEach(function () {

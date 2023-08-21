@@ -9,8 +9,8 @@ const dbProducts = require('../../mochs/dbProducts');
 const { expect } = chai;
 chai.use(sinonChai);
 
-describe('testando productController', function () {
-  it('testando findAll', async function () {
+describe('Restes da productController', function () {
+  it('testando função findAll', async function () {
     sinon.stub(productsService, 'findAll').resolves({
         status: 'SUCCESSFUL',
         data: dbProducts,

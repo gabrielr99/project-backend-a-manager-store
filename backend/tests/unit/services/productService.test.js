@@ -8,14 +8,14 @@ const dbProducts = require('../../mochs/dbProducts');
 const { expect } = chai;
 
 describe('testes prodctsService', function () {
-  it('testando findAll', async function () {
+  it('testando função findAll', async function () {
     sinon.stub(productsModel, 'findAll').resolves([dbProducts]);
     const result = await productsService.findAll();
     expect(result).to.be.a('object');
     expect(result.status).to.be.equal('SUCCESSFUL');
   });
 
-  it('testando findAll com products inexistente', async function () {
+  it('testando função findAll com products inexistente', async function () {
     sinon.stub(productsModel, 'findAll').resolves(null);
     const result = await productsService.findAll();
     expect(result).to.be.a('object');

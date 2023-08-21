@@ -10,7 +10,7 @@ const { expect } = chai;
 chai.use(sinonChai);
 
 describe('Testes da salesController', function () {
-  it('Lista todas as vendas com sucesso - Status 200', async function () {
+  it('testando função findAll', async function () {
     sinon.stub(salesService, 'findAll')
       .resolves({ status: 'SUCCESSFUL', data: salesFromDB });
 
@@ -25,7 +25,7 @@ describe('Testes da salesController', function () {
     expect(res.json).to.be.calledWith(salesFromDB);
   });
 
-  it('Lista uma única venda com sucesso - Status 200', async function () {
+  it('testando função findById', async function () {
     sinon.stub(salesService, 'findById')
       .resolves({ status: 'SUCCESSFUL', data: foundSales[0] });
 
@@ -42,7 +42,7 @@ describe('Testes da salesController', function () {
     expect(res.json).to.be.calledWith(foundSales[0]);
   });
 
-  it('Verifica se retorna o status correto do erro "Sale not found" - Status 404', async function () {
+  it('testando função findById com id inexistente', async function () {
     sinon.stub(salesService, 'findById')
       .resolves({ status: 'NOT_FOUND', data: { message: 'Sale not found' } });
 
@@ -59,7 +59,7 @@ describe('Testes da salesController', function () {
     expect(res.json).to.be.calledWith({ message: 'Sale not found' });
   });
 
-  it('Verifica se uma nova "sale" foi criada com sucesso - Status 201', async function () {
+  it('testando função insert', async function () {
     const newSale = {
       id: 3,
       itemsSold: [

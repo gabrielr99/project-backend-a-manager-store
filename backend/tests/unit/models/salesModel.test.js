@@ -6,7 +6,7 @@ const { salesModel } = require('../../../src/models');
 const { salesFromDB, foundSales } = require('../../mochs/dbSales');
 
 describe('testes salesModel', function () {
-  it('testando funcção findAll', async function () {
+  it('testando função findAll', async function () {
     // AAA
     // Arramjar(preparar)
     sinon.stub(connection, 'execute').resolves([salesFromDB]);
