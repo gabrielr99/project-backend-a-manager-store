@@ -38,6 +38,16 @@ describe('testes ProductsModel', function () {
     expect(result).to.be.deep.equal(newProductId);
   });
 
+  it('testando função insert com erro', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 0 }]);
+    const newProduct = {
+      name: 'ProdutoX',
+    };
+    const result = await productsModel.insert(newProduct);
+    expect(result).to.be.a('number');
+    expect(result).to.be.deep.equal(0);
+  });
+
   it('testando função deleted', async function () {
     sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
     const productId = 1;

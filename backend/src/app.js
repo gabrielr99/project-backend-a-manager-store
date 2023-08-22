@@ -23,5 +23,6 @@ app.delete('/products/:id', productsController.deleted);
 app.get('/sales', salesController.findAll);
 app.get('/sales/:id', salesController.findById);
 app.post('/sales', salesController.insert);
+app.delete('/sales/:id', salesController.deleted);
 
 module.exports = app;
