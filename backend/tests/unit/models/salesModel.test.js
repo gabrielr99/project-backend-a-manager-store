@@ -40,6 +40,13 @@ describe('testes salesModel', function () {
     expect(sale).to.be.deep.equal([]);
   });
 
+  it('testando função updateQuantity', async function () {
+    sinon.stub(connection, 'execute').resolves([foundSales[2]]);
+    const sale = await salesModel.updateQuantity(2, 3, { quantity: 10 });
+    expect(sale).to.be.an('array');
+    expect(sale).to.be.deep.equal([foundSales[2]]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

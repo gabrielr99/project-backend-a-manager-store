@@ -1,5 +1,7 @@
 const { salesModel } = require('../models');
 const { validateInsertSales } = require('../utils/validateInsertSales');
+const { validateUpdateQuantityInSale,
+  validateQuantity } = require('../utils/validateUpdateQuantityInSale');
 
 const findAll = async () => {
   const sales = await salesModel.findAll();
@@ -40,9 +42,24 @@ const deleted = async (productId) => {
   return { status: 'DELETE' };
 };
 
+const updateQuantity = async (saleId, productIdToUpdate, dataQauntity) => {
+  const error = await validateUpdateQuantityInSale(saleId, productIdToUpdate)
+    || validateQuantity(dataQauntity);
+  if (error) {
+    const { data } = error;
+    return { status: error.status, data: { message: data.message } };
+  }
+  await salesModel.updateQuantity(saleId, productIdToUpdate, dataQauntity);
+  const findSale = await salesModel.findById(saleId);
+  const saleToUpdateQuantity = findSale
+    .find(({ productId }) => productId === productIdToUpdate);
+  return { status: 'SUCCESSFUL', data: { ...saleToUpdateQuantity, saleId } };
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   deleted,
+  updateQuantity,
 };

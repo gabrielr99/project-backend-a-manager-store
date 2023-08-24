@@ -27,9 +27,20 @@ const deleted = async (req, res) => {
   return res.status(mapStatusHTTP(status)).end();
 };
 
+const updateQuantity = async (req, res) => {
+  const { saleId, productId } = req.params;
+  const numberSaleId = Number(saleId);
+  const numberProductId = Number(productId);
+  const dataQauntity = req.body;
+  const { status, data } = await salesService
+    .updateQuantity(numberSaleId, numberProductId, dataQauntity);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   deleted,
+  updateQuantity,
 };

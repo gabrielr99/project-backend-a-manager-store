@@ -54,9 +54,15 @@ const deleted = async (saleId) => {
   return connection.execute(query, [saleId]);
 };
 
+const updateQuantity = async (saleId, productId, dataQuantity) => {
+  const query = 'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?';
+  return connection.execute(query, [...Object.values(dataQuantity), saleId, productId]);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   deleted,
+  updateQuantity,
 };

@@ -46,8 +46,22 @@ const insertSale = [
   },
 ];
 
+const saleToupdateQuantity = [
+  { date, productId: 1, quantity: 5 },
+  { date, productId: 2, quantity: 10 },
+];
+
+const updateQuantity = {
+  date,
+  productId: 2,
+  quantity: 5,
+  saleId: 1,
+};
+
 module.exports = {
     salesFromDB,
     foundSales,
     insertSale,
+    saleToupdateQuantity,
+    updateQuantity,
 };
