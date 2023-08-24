@@ -12,6 +12,12 @@ const findById = async (req, res) => {
     return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const findByName = async (req, res) => {
+  const { q } = req.query;
+  const { status, data } = await productsService.findByName(q);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 const insert = async (req, res) => {
   const dataProduct = req.body;
   const { status, data } = await productsService.insert(dataProduct);
@@ -40,4 +46,5 @@ module.exports = {
     insert,
     update,
     deleted,
+    findByName,
 };

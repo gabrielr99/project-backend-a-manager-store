@@ -16,6 +16,18 @@ const findById = async (productId) => {
     return { status: 'SUCCESSFUL', data: product };
 };
 
+const findByName = async (name) => {
+  if (!name) {
+    const products = await productsModel.findAll();
+    return { status: 'SUCCESSFUL', data: products };
+  }
+  const product = await productsModel.findByName(name);
+  if (!product) {
+    return { status: 'NOT_FOUND', data: { message: 'Product not found' } };
+  }
+  return { status: 'SUCCESSFUL', data: product };
+};
+
 const insert = async (dataProduct) => {
   const productId = await productsModel.insert(dataProduct);
   const newProduct = await productsModel.findById(productId);
@@ -42,6 +54,7 @@ const deleted = async (productId) => {
 module.exports = {
   findAll,
   findById,
+  findByName,
   insert,
   update,
   deleted,
